@@ -42,9 +42,54 @@ void test01()
 	}
 	cout << endl;
 }
+void test02()
+{
+	list<int> l1(10, 1);
+	l1.push_back(6);
+	l1.push_front(6);
+	for (auto e : l1)
+	{
+		cout << e << " ";
+	}
+	cout << endl;
+
+	l1.resize(8, 3);
+	for (auto e : l1)
+	{
+		cout << e << " ";
+	}
+	cout << endl;
+
+}
+void test03()
+{
+	srand(time(0));
+	const int N = 100000;
+	list <int> lt1;
+	vector<int> v;
+	for (int i = 0;i < N;++i)
+	{
+		auto e = rand() + i;
+		lt1.push_back(e);
+		v.push_back(e);
+	}
+	int begin1 = clock();
+	sort(v.begin(), v.end());
+	int end1 = clock();
+
+	int begin2 = clock();
+	lt1.sort();
+	int end2 = clock();
+	printf("vector sort:%d\n", end1 - begin1);
+	printf("list sort:%d\n", end2 - begin2);
+
+
+}
 int main()
 {
-	test01();
+	//test01();
+	//test02();
+	test03();
 	int main();
 	
 }
