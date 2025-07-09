@@ -85,11 +85,25 @@ void test03()
 
 
 }
+void test04()
+{
+	list<double> lt1 = { 1,2,3,4,5 };
+	auto it = find(lt1.begin(), lt1.end(), 3);
+	lt1.splice(lt1.begin(), lt1, it,next(it));
+	for (auto e : lt1)
+	{
+		cout << e << " ";
+	}
+	cout << endl;
+
+}
+
 int main()
 {
 	//test01();
 	//test02();
-	test03();
+	//test03();
+	test04();
 	int main();
 	
 }
