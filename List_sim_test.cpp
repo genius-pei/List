@@ -2,6 +2,15 @@
 #include"List.h"
 namespace yiming
 {
+	void print(const list<int>&lt)//如何实现指向的内容不能修该但是能对it进行操作？
+	{
+		list<int>::const_iterator it = lt.begin();
+		while (it != lt.end())
+		{
+			cout << *it << " ";
+			++it;
+		}
+	}
 	void test01()
 	{
 		yiming::list<int> lt;
@@ -10,11 +19,8 @@ namespace yiming
 		lt.push_back(3);
 		lt.push_back(4);
 		list<int>::iterator it = lt.begin();
-		while (it != lt.end())
-		{
-			cout << *it << " ";
-			++it;
-		}
+		lt.insert(it, 10);
+		print(lt);
 	}
 }
 int main()
