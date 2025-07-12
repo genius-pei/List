@@ -26,6 +26,8 @@ namespace yiming
 		print(lt);
 		yiming::list<int> lt2(lt);
 		print(lt2);
+		yiming::list<int> lt3={ 1,2,3,4,5 };
+		print(lt3);
 		
 	}
 }
