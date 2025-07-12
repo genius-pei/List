@@ -10,6 +10,7 @@ namespace yiming
 			cout << *it << " ";
 			++it;
 		}
+		cout << endl;
 	}
 	void test01()
 	{
@@ -20,7 +21,12 @@ namespace yiming
 		lt.push_back(4);
 		list<int>::iterator it = lt.begin();
 		lt.insert(it, 10);
+		lt.push_back(6);
+		lt.push_front(3);
 		print(lt);
+		yiming::list<int> lt2(lt);
+		print(lt2);
+		
 	}
 }
 int main()
