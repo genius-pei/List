@@ -153,24 +153,53 @@ namespace yiming
 			_head->_prev = _head;
 			
 		}
+		list(const list<T>& lt)
+		{
+			//先让新创建的对象拥有自己的头尾节点
+			_head = new Node;
+			_head->_next = _head;
+			_head->_prev = _head;
+			//遍历将后续节点接入
+			for (const auto& e : lt)
+			{
+				push_back(e);
+			}
+		}
 		~list()
+		{
+			clear();
+			delete _head;
+			_head = nullptr;
+		}
+		void clear()
 		{
 			iterator it = begin();
 			while (it != end())
 			{
-				it= erase(it);
+				it = erase(it);
 			}
-			delete _head;
-			_head = nullptr;
 		}
 		void push_back(const T& x)
 		{
-			Node* newnode = new Node(x);
-			Node* tail = _head->_prev;
-			tail->_next = newnode;
-			newnode->_prev = tail;
-			newnode->_next = _head;
-			_head->_prev = newnode;
+			//Node* newnode = new Node(x);
+			//Node* tail = _head->_prev;
+			//tail->_next = newnode;
+			//newnode->_prev = tail;
+			//newnode->_next = _head;
+			//_head->_prev = newnode;
+			insert(end(), x);
+		}
+		void push_front(const T& x)
+		{
+			insert(begin(), x);
+		}
+		void pop_back()
+		{
+			erase(--end());
+		}
+		void pop_front()
+		{
+			erase(begin());
 		}
 		iterator insert(iterator pos, const T& val)
 		{
