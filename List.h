@@ -174,6 +174,29 @@ namespace yiming
 				push_back(e);
 			}
 		}
+		void swap(list<T>& lt)
+		{
+			std::swap(_head, lt._head);
+			std::swap(_size, lt._size);
+		}
+		list<T>& operator=( list<T> lt)//不使用引用，会调用拷贝构造，不用担心右侧值被修改
+		{
+			swap(lt);
+			return *this;
+		}
+		//list<T>& operator=(const list<T>& lt)
+		//{
+		//	if (this != &lt)//不是同一个节点时
+		//	{
+		//		clear();
+		//		for (const auto& e : lt)
+		//		{
+		//			push_back(e);
+		//		}
+		//	}
+		//	return *this;
+		//}
+		
 
 		~list()
 		{
@@ -224,7 +247,9 @@ namespace yiming
 			// 更新相邻节点
 			prev->_next = newnode;    // 原始前驱→新节点
 			cur->_prev = newnode;     // 当前节点←新节点
+			++_size;
 			return iterator(newnode);
+			
 		}
 		iterator erase(iterator pos)
 		{
@@ -235,9 +260,22 @@ namespace yiming
 			cur->_next = next;
 			cur->_prev = prev;
 			delete cur;
+			--_size;
 			return iterator(next);
+			
+		}
+		size_t size()const
+		{
+			//int n = 0;
+			//for (auto e : *this)
+			//{
+			//	++n;
+			//}
+			//return n;
+			return _size;
 		}
 	private:
 		Node* _head;
+		size_t _size=0;
 	};
 }
