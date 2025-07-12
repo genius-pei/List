@@ -2,9 +2,10 @@
 #include"List.h"
 namespace yiming
 {
-	void print(const list<int>&lt)//如何实现指向的内容不能修该但是能对it进行操作？
+	template<class T>
+	void print(const list<T>&lt)//如何实现指向的内容不能修该但是能对it进行操作？
 	{
-		list<int>::const_iterator it = lt.begin();
+		typename list<T>::const_iterator it = lt.begin();//类模版未实例化，不能去类模版中找后面的东西,typename告诉编译器是类型而非静态成员变量
 		while (it != lt.end())
 		{
 			cout << *it << " ";
