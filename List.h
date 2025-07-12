@@ -146,25 +146,35 @@ namespace yiming
 		{
 			return const_iterator(_head);
 		}
-		list()
+		void empty_init()
 		{
 			_head = new Node;
 			_head->_next = _head;
 			_head->_prev = _head;
-			
+		}
+		list()
+		{
+			empty_init();
 		}
 		list(const list<T>& lt)
 		{
 			//先让新创建的对象拥有自己的头尾节点
-			_head = new Node;
-			_head->_next = _head;
-			_head->_prev = _head;
+			empty_init();
 			//遍历将后续节点接入
 			for (const auto& e : lt)
 			{
 				push_back(e);
 			}
 		}
+		list(initializer_list<T> il)
+		{
+			empty_init();
+			for (const auto& e : il)
+			{
+				push_back(e);
+			}
+		}
+
 		~list()
 		{
 			clear();
