@@ -257,8 +257,8 @@ namespace yiming
 			Node* prev = cur->_prev;
 			Node* next = cur->_next;
 
-			cur->_next = next;
-			cur->_prev = prev;
+			prev->_next = next;
+			next->_prev = prev;
 			delete cur;
 			--_size;
 			return iterator(next);

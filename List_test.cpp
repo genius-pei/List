@@ -1,9 +1,60 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <cassert>
+#include <initializer_list>
 #include<iostream>
 #include<algorithm>
 #include<vector>
 #include<list>
+#include "List.h"
 using namespace std;
+
+void assert_list_values(const yiming::list<int>& values, std::initializer_list<int> expected)
+{
+	assert(values.size() == expected.size());
+	auto actual = values.begin();
+	for (int value : expected)
+	{
+		assert(actual != values.end());
+		assert(*actual == value);
+		++actual;
+	}
+	assert(actual == values.end());
+}
+
+void test_custom_list_erase()
+{
+	yiming::list<int> values{ 1, 2, 3, 4 };
+	auto middle = values.begin();
+	++middle;
+	++middle;
+	auto next = values.erase(middle);
+	assert(next != values.end());
+	assert(*next == 4);
+	assert_list_values(values, { 1, 2, 4 });
+
+	auto first = values.erase(values.begin());
+	assert(first != values.end());
+	assert(*first == 2);
+	assert_list_values(values, { 2, 4 });
+
+	auto last = values.end();
+	--last;
+	auto after_last = values.erase(last);
+	assert(after_last == values.end());
+	assert_list_values(values, { 2 });
+
+	auto after_only = values.erase(values.begin());
+	assert(after_only == values.end());
+	assert_list_values(values, {});
+
+	values.clear();
+	values.push_back(5);
+	assert_list_values(values, { 5 });
+	values.clear();
+	assert(values.begin() == values.end());
+	assert(values.size() == 0);
+}
+
 void test01()
 {
 	list<int> lt1;
@@ -100,6 +151,7 @@ void test04()
 
 int main()
 {
+	test_custom_list_erase();
 	//test01();
 	//test02();
 	//test03();
